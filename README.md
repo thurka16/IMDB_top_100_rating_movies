@@ -33,7 +33,7 @@ The analysis explores various aspects of the top 100 movies, including:
 If you want to use this dataset or explore the analysis further, you can:
 
 - Access the dataset in (imdb_top_1000.csv) in Kaggle.
-- Check out the Jupyter Notebook with the full analysis: [imdb_movie.ipynb](analysis/DataAnalysis.ipynb).
+- Check out the Jupyter Notebook with the full analysis: [imdb_movie.ipynb](IMDB_top_100_rating_movies/imdb_movies.ipynb).
 
 ## Getting Started
 
