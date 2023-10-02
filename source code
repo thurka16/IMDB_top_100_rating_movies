@@ -1,0 +1,134 @@
+#!/usr/bin/env python
+# coding: utf-8
+
+# In[81]:
+import pandas as pd
+import seaborn as sns
+import numpy as np
+import scipy.stats as stats
+import matplotlib.pyplot as plt
+
+# In[82]:
+
+data = pd.read_csv('imdb_top_1000.csv')
+
+# In[83]:
+
+print(data.head())
+
+# In[84]:
+
+print(data.describe())
+
+# In[85]:
+
+print("Missing values:")
+print(data.isnull().sum())
+
+# In[86]:
+
+data = data.dropna()
+
+# In[87]:
+
+print("Missing values:")
+print(data.isnull().sum())
+
+# In[88]:
+
+print("\nDuplicate rows:")
+print(data.duplicated().sum())
+
+# In[89]:
+
+data_cleaned = data.dropna()
+
+# In[90]:
+
+empty_cells = data.isnull()
+
+# In[91]:
+
+data['Certificate'].value_counts()
+
+# In[92]:
+
+data['Certificate'].fillna('U',inplace=True)
+
+# In[93]:
+
+row_count = len(data)
+
+# In[94]:
+
+print(f'The DataFrame has {row_count} rows.')
+
+print("Dataset Info:")
+print(data.info())
+# In[95]:
+
+print("\nSummary Statistics:")
+print(data.describe())
+
+# In[96]:
+
+features = ['Series_Title','Released_Year','Runtime','Genre', 'IMDB_Rating','Meta_score','Director','Gross']
+cleaned_data = data[features].dropna()
+
+# In[97]:
+
+cleaned_data
+
+# In[98]:
+
+cleaned_data.Genre
+
+# In[99]:
+
+print("Dataset Info:")
+print(cleaned_data.info())
+
+# In[100]:
+
+cleaned_data.Gross
+
+# In[101]:
+
+cleaned_data.Released_Year
+
+# In[102]:
+
+cleaned_data.sort_values("IMDB_Rating")
+
+# In[103]:
+
+cleaned_data.sort_values(
+    by=["IMDB_Rating"],
+    ascending=[False])
+
+# In[104]:
+
+top_rated_movies = cleaned_data.sort_values(by='IMDB_Rating', ascending=False)
+print(top_rated_movies.head(100))
+
+# In[105]:
+
+specific_range = top_rated_movies.iloc[1:100]
+
+# In[106]:
+
+specific_range
+
+# In[107]:
+
+plt.figure(figsize=(8, 6))
+plt.hist(specific_range['Meta_score'], bins=20, color='skyblue', edgecolor='black')
+plt.title('IMDB Rating Distribution')
+plt.xlabel('Meta_score')
+plt.ylabel('IMDB_Rating')
+plt.show()
+
+# In[108]:
+
+specific_range.to_csv('IMDB_top_100_Rating_Movies.csv', index=False)
+# In[ ]:
